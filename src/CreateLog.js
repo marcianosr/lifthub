@@ -4,27 +4,15 @@ import { DateTime } from "luxon";
 
 import Page from "./layout/Page";
 import Button from "./Button";
-import ChildInputField from "./layout/ChildInputField";
+import ExcersiseInputField from "./ExcersiseInputField";
 
 const CreateLog = () => {
   const date = DateTime.local(); // get today's date
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Ids
-  const [stateId, setStateId] = useState(1);
-  // Values
-  const [inputValue, setInputValue] = useState({
-    [0]: {
-      id: 0,
-      excersise: "",
-    },
-  });
-
   const [programState, setProgramState] = useState({
-    ...inputValue,
     [0]: {
-      ...inputValue[0],
       sets: [
         {
           id: 0,
@@ -42,35 +30,7 @@ const CreateLog = () => {
     program: [],
   });
 
-  //  Fields
-  const [inputFields, setInputFieldsState] = useState({
-    fields: [
-      {
-        id: 0,
-        name: "excersise",
-        type: "text",
-      },
-    ],
-  });
-
   const [item, setItem] = useLocalStorage(`training-${trainingData.date}`);
-
-  const addField = e => {
-    e.preventDefault();
-    setStateId(stateId => stateId + 1);
-
-    setInputFieldsState({
-      ...inputFields,
-      fields: [
-        ...inputFields.fields,
-        {
-          id: stateId,
-          name: "excersise",
-          type: "text",
-        },
-      ],
-    });
-  };
 
   const onChange = e => {
     if (e.target.type === "date") {
@@ -86,28 +46,6 @@ const CreateLog = () => {
     if (e.target.name === "training-name") {
       setTrainingData({ ...trainingData, name: e.target.value });
       return;
-    }
-
-    setInputValue({
-      ...inputValue,
-      [e.target.id]: {
-        id: parseInt(e.target.id),
-        [e.target.name]: e.target.value || "",
-      },
-    });
-  };
-
-  const mergeSetsToExcersise = (value, parentId) => {
-    const sets = Object.values(value);
-    const inputValue2 = Object.values(inputValue);
-    if (sets.length !== 0) {
-      setProgramState({
-        ...programState,
-        [parentId]: {
-          ...inputValue2[parentId],
-          sets: [...sets],
-        },
-      });
     }
   };
 
@@ -149,7 +87,7 @@ const CreateLog = () => {
         })}
       </ul>
 
-      <h1>Create log {stateId}</h1>
+      <h1>Create log</h1>
       <form className="create-log-form">
         <fieldset>
           <label htmlFor="training-name">Training name</label>
@@ -169,38 +107,11 @@ const CreateLog = () => {
           />
         </fieldset>
 
-        <>
-          {inputFields.fields.map((input, idx) => {
-            return (
-              <fieldset key={idx}>
-                <div key={idx}>
-                  <label htmlFor={input.id}>{input.name}</label>
-                  <input
-                    type={input.type}
-                    id={input.id}
-                    name={input.name}
-                    onChange={e => {
-                      onChange(e, idx);
-                    }}
-                    value={(inputValue[idx] && inputValue[idx].excersise) || ""}
-                  />
-                  <ChildInputField
-                    parentId={input.id}
-                    mergeSetsToExcersise={mergeSetsToExcersise}
-                  />
-                </div>
-              </fieldset>
-            );
-          })}
-        </>
-        <Button
-          type="submit"
-          onClick={e => {
-            addField(e);
-          }}
-        >
-          Add new field
-        </Button>
+        <ExcersiseInputField
+          programState={programState}
+          setProgramState={setProgramState}
+        />
+
         <Button type="button" onClick={onSubmit}>
           Submit
         </Button>

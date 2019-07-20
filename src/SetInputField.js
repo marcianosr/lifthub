@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button";
+import Button from "./Button";
 
-const ChildInputField = ({ parentId, mergeSetsToExcersise }) => {
+const SetInputField = ({ parentId, mergeSetsToExcersise }) => {
   const [stateChildrenId, setStateChildrenId] = useState(1);
 
   const [childrenInputFields, setChildrenInputFields] = useState([
@@ -78,4 +78,4 @@ const ChildInputField = ({ parentId, mergeSetsToExcersise }) => {
   );
 };
 
-export default ChildInputField;
+export default SetInputField;

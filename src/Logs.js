@@ -5,7 +5,6 @@ import { useLocalStorage } from "react-use";
 import Block from "./layout/Block";
 import ListItem from "./layout/ListItem";
 import { mockData } from "./mockData";
-import EditLog from "./EditLog";
 
 const calculateVolume = mockData => {
   return mockData.map(data => {
@@ -23,7 +22,7 @@ const calculateVolume = mockData => {
 };
 
 const getLogs = () => {
-  const [value] = useLocalStorage(`training-16-7-2019`);
+  const [value] = useLocalStorage(`training-17-7-2019`);
 
   return value;
 };

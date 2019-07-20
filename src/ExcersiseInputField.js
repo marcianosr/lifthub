@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import ChildInputField from "./layout/ChildInputField";
+import SetInputField from "./SetInputField";
+import Button from "./Button";
 
-const ExcersiseInputField = () => {
+const ExcersiseInputField = ({ programState, setProgramState }) => {
+  const [stateId, setStateId] = useState(1);
+
+  console.log("//", programState);
+
   const [inputFields, setInputFieldsState] = useState({
     fields: [
       {
@@ -20,22 +25,24 @@ const ExcersiseInputField = () => {
     },
   });
 
+  const addField = e => {
+    e.preventDefault();
+    setStateId(stateId => stateId + 1);
+
+    setInputFieldsState({
+      ...inputFields,
+      fields: [
+        ...inputFields.fields,
+        {
+          id: stateId,
+          name: "excersise",
+          type: "text",
+        },
+      ],
+    });
+  };
+
   const onChange = e => {
-    if (e.target.type === "date") {
-      const date = DateTime.fromISO(e.target.value);
-
-      setTrainingData({
-        ...trainingData,
-        date: `${date.day}-${date.month}-${date.year}`,
-      });
-      return;
-    }
-
-    if (e.target.name === "training-name") {
-      setTrainingData({ ...trainingData, name: e.target.value });
-      return;
-    }
-
     setInputValue({
       ...inputValue,
       [e.target.id]: {
@@ -73,11 +80,19 @@ const ExcersiseInputField = () => {
             }}
             value={(inputValue[idx] && inputValue[idx].excersise) || ""}
           />
-          <ChildInputField
+          <SetInputField
             parentId={input.id}
             mergeSetsToExcersise={mergeSetsToExcersise}
           />
         </div>
+        <Button
+          type="submit"
+          onClick={e => {
+            addField(e);
+          }}
+        >
+          Add new field
+        </Button>
       </fieldset>
     );
   });
