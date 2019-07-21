@@ -27,7 +27,17 @@ const SetInputField = ({ parentId, mergeSetsToExcersise }) => {
         name: "reps",
         type: "number",
       },
+      {
+        id: "button",
+        name: "Button",
+      },
     ]);
+  };
+
+  const deleteSet = e => {
+    e.preventDefault();
+
+    setChildrenInputFields([...childrenInputFields]);
   };
 
   const onChange = e => {
@@ -63,6 +73,7 @@ const SetInputField = ({ parentId, mergeSetsToExcersise }) => {
                 ""
               }
             />
+            <button>hoi</button>
           </div>
         );
       })}
