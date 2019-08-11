@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "react-use";
 
 import Button from "./Button";
-import { strict } from "assert";
 
 const EditLog = ({ match }) => {
   const [logData, setLogData] = useState();

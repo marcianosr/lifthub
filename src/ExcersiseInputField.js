@@ -6,8 +6,6 @@ import Button from "./Button";
 const ExcersiseInputField = ({ programState, setProgramState }) => {
   const [stateId, setStateId] = useState(1);
 
-  console.log("//", programState);
-
   const [inputFields, setInputFieldsState] = useState({
     fields: [
       {

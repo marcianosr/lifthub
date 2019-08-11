@@ -75,11 +75,15 @@ const CreateLog = () => {
               {program.id} - excersise: {program.excersise}
               <ul>
                 {program.sets.map((set, idx) => {
-                  return (
-                    <li key={idx}>
-                      {set.id} - weight: {set.weight} - reps: {set.reps}
-                    </li>
-                  );
+                  if (set) {
+                    return (
+                      <li key={idx}>
+                        {set.id} - weight: {set.weight} - reps: {set.reps}
+                      </li>
+                    );
+                  } else {
+                    return null;
+                  }
                 })}
               </ul>
             </li>
