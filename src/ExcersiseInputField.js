@@ -1,99 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 
 import SetInputField from "./SetInputField";
 import Button from "./Button";
+import SubElements from "./SubElements";
+
+import { elementsReducer } from "./reducers/elementsReducer";
+import { formValuesReducer } from "./reducers/formValuesReducer";
 
 const ExcersiseInputField = ({ programState, setProgramState }) => {
   const [stateId, setStateId] = useState(1);
 
-  const [inputFields, setInputFieldsState] = useState({
-    fields: [
+  const initialElements = {
+    [0]: [
       {
         id: 0,
+        element: "label",
+        value: "Excersise",
+        htmlFor: null,
+      },
+      {
+        id: 0,
+        element: "input",
         name: "excersise",
         type: "text",
       },
     ],
-  });
+  };
 
-  const [inputValue, setInputValue] = useState({
-    [0]: {
-      id: 0,
-      excersise: "",
-    },
-  });
+  const initialFormValues = {
+    id: 0,
+    excersise: null,
+    sets: [
+      {
+        id: 0,
+        weight: null,
+        reps: null,
+      },
+    ],
+  };
 
-  const addField = e => {
+  const [elements, dispatch] = useReducer(elementsReducer, initialElements);
+
+  const [formValues, dispatchFormValues] = useReducer(
+    formValuesReducer,
+    initialFormValues
+  );
+
+  const addNewExcersise = e => {
     e.preventDefault();
     setStateId(stateId => stateId + 1);
 
-    setInputFieldsState({
-      ...inputFields,
-      fields: [
-        ...inputFields.fields,
-        {
-          id: stateId,
-          name: "excersise",
-          type: "text",
-        },
-      ],
+    dispatch({
+      type: "ADD_ELEMENT",
+      id: stateId,
     });
   };
 
   const onChange = e => {
-    setInputValue({
-      ...inputValue,
-      [e.target.id]: {
-        id: parseInt(e.target.id),
-        [e.target.name]: e.target.value || "",
-      },
+    dispatchFormValues({
+      type: "CHANGE_EXCERSISE",
+      id: parseInt(e.target.id),
+      value: e.target.value,
     });
   };
 
-  const mergeSetsToExcersise = (value, parentId) => {
-    const sets = Object.values(value);
-    const inputValue2 = Object.values(inputValue);
-    if (sets.length !== 0) {
-      setProgramState({
-        ...programState,
-        [parentId]: {
-          ...inputValue2[parentId],
-          sets: [...sets],
-        },
-      });
-    }
-  };
+  console.log(formValues);
 
-  return inputFields.fields.map((input, idx) => {
-    return (
-      <fieldset key={idx}>
-        <div key={idx}>
-          <label htmlFor={input.id}>{input.name}</label>
-          <input
-            type={input.type}
-            id={input.id}
-            name={input.name}
-            onChange={e => {
-              onChange(e, idx);
-            }}
-            value={(inputValue[idx] && inputValue[idx].excersise) || ""}
-          />
-          <SetInputField
-            parentId={input.id}
-            mergeSetsToExcersise={mergeSetsToExcersise}
-          />
-        </div>
-        <Button
-          type="submit"
-          onClick={e => {
-            addField(e);
-          }}
-        >
-          Add new field
-        </Button>
-      </fieldset>
-    );
-  });
+  return (
+    <>
+      {Object.values(elements).map((list, idx) => {
+        return (
+          <fieldset key={idx}>
+            {list.map((item, idx) => {
+              const Component = item.element;
+
+              if (item.element === "label") {
+                return (
+                  <Component key={idx} htmlFor={item.id}>
+                    {item.value}
+                  </Component>
+                );
+              } else if (item.element === "input") {
+                return (
+                  <>
+                    <Component
+                      key={idx}
+                      id={item.id}
+                      name={item.name}
+                      type={item.type}
+                      value={formValues.excersise || ""}
+                      onChange={onChange}
+                    />
+                  </>
+                );
+              }
+            })}
+            <SubElements />
+          </fieldset>
+        );
+      })}
+      <Button type="submit" onClick={addNewExcersise}>
+        Add new field
+      </Button>
+    </>
+  );
 };
 
 export default ExcersiseInputField;
