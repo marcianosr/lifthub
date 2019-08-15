@@ -3,21 +3,20 @@ import SetsControls from "./SetsControls";
 import Button from "./Button";
 
 const ExcersiseControls = ({ program, setProgramState }) => {
-  const [id, setId] = React.useState(1);
+  const id = React.useRef(0);
 
   const addExcersise = e => {
-    setId(id => id + 1);
     setProgramState([
       ...program,
       {
-        id,
+        id: id.current,
         excersise: "",
         sets: [
           {
-            id: 0,
-            parentId: id,
-            reps: "",
+            id: id.current,
+            parentId: id.current,
             weight: "",
+            reps: "",
           },
         ],
       },
