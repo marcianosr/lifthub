@@ -15,7 +15,7 @@ const ExcersiseControls = ({ program, setProgramState }) => {
         sets: [
           {
             id: 0,
-            parentId: 0,
+            parentId: id,
             reps: "",
             weight: "",
           },

@@ -3,7 +3,7 @@ import React from "react";
 import Button from "./Button";
 
 const SetControls = ({ program, setProgramState, parentId }) => {
-  const [id, setId] = React.useState(1);
+  const id = React.useRef(0);
 
   const onChange = e => {
     const values = [...program];
@@ -13,44 +13,32 @@ const SetControls = ({ program, setProgramState, parentId }) => {
   };
 
   const addSet = e => {
-    setId(id => id + 1);
+    const values = [...program];
 
-    const values = {
-      ...program[parentId],
-      sets: [
-        ...program[parentId].sets,
-        {
-          id,
-          parentId,
-          weight: "",
-          reps: "",
-        },
-      ],
-    };
+    id.current++;
 
-    setProgramState([values]);
+    values[parentId].sets = [
+      ...values[parentId].sets,
+      { id: id.current, parentId, weight: "", reps: "" },
+    ];
+
+    setProgramState(values);
   };
 
   const deleteSet = e => {
-    const deletedValues = {
-      ...program[parentId],
-      sets: [
-        ...program[parentId].sets.filter(
-          (value, idx) => idx !== parseInt(e.target.id)
-        ),
-      ],
-    };
+    const values = [...program];
 
-    setProgramState([deletedValues]);
+    values[parentId].sets = [
+      ...program[parentId].sets.slice(0, parseInt(e.target.id)),
+      ...program[parentId].sets.slice(parseInt(e.target.id) + 1),
+    ];
+
+    setProgramState(values);
   };
 
   return (
     <>
       {program[parentId].sets.map((set, idx) => {
-        {
-          console.log("s", set);
-        }
-
         return (
           <fieldset key={idx}>
             <label>Weight</label>
