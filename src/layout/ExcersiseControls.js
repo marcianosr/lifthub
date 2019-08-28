@@ -2,46 +2,55 @@ import React from "react";
 import SetsControls from "./SetsControls";
 import Button from "./Button";
 
-const ExcersiseControls = ({ program, setProgramState }) => {
+const ExcersiseControls = ({ data, setData }) => {
   const id = React.useRef(0);
-
   const addExcersise = e => {
-    setProgramState([
-      ...program,
-      {
-        id: id.current,
-        excersise: "",
-        sets: [
-          {
-            id: id.current,
-            parentId: id.current,
-            weight: "",
-            reps: "",
-          },
-        ],
-      },
-    ]);
+    id.current++;
+    setData({
+      ...data,
+      program: [
+        ...data.program,
+        {
+          id: id.current,
+          excersise: "",
+          sets: [
+            {
+              id: id.current,
+              parentId: id.current,
+              weight: "",
+              reps: "",
+            },
+          ],
+        },
+      ],
+    });
   };
 
   const onChange = e => {
-    const values = [...program];
+    const values = [...data.program];
 
     values[e.target.id].excersise = e.target.value;
 
-    setProgramState(values);
+    setData({
+      ...data,
+      program: values,
+    });
   };
 
   const deleteExcersise = e => {
-    const deletedValues = program.filter(
+    const deletedValues = data.program.filter(
       (value, idx) => idx !== parseInt(e.target.id)
     );
 
-    setProgramState(deletedValues);
+    setData({
+      ...data,
+      program: deletedValues,
+    });
   };
 
   return (
     <>
-      {program.map((input, idx) => (
+      {data.program.map((input, idx) => (
         <fieldset key={idx}>
           <label>Excersise </label>
           <input
@@ -51,11 +60,7 @@ const ExcersiseControls = ({ program, setProgramState }) => {
             onChange={onChange}
             name="excersise"
           />
-          <SetsControls
-            program={program}
-            setProgramState={setProgramState}
-            parentId={idx}
-          />
+          <SetsControls data={data} setData={setData} parentId={idx} />
           <Button id={idx} onClick={deleteExcersise}>
             Delete Excersise
           </Button>

@@ -1,59 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { useLocalStorage } from "react-use";
-import { DateTime } from "luxon";
+import React, { useState } from "react";
+
+import useForm from "./hooks/useForm";
 
 import Page from "./layout/Page";
 import Button from "./layout/Button";
 import ExcersiseControls from "./layout/ExcersiseControls";
 
 const CreateLog = () => {
-  const [program, setProgramState] = useState([
-    {
-      id: 0,
-      excersise: "",
-      sets: [
-        {
-          id: 0,
-          parentId: 0,
-          weight: "",
-          reps: "",
-        },
-      ],
-    },
-  ]);
-
-  console.log("program", Object.values(program));
+  const [data, setData, onChange, onSubmit] = useForm();
 
   return (
     <Page>
+      {data.program.map(value => {
+        return (
+          <>
+            <h2>{value.excersise}</h2>
+            {value.sets.map((v, idx) => {
+              return (
+                <p key={idx}>
+                  {v.id} - {v.weight} - {v.reps}
+                </p>
+              );
+            })}
+          </>
+        );
+      })}
       <h1>Create log</h1>
+
       <form className="create-log-form">
-        {/* <fieldset>
+        <fieldset>
           <label htmlFor="training-name">Training name</label>
           <input
             type="text"
             id="training-name"
             name="training-name"
             onChange={onChange}
+            value={data.name || "Training"}
           />
           <label htmlFor="date">Date</label>
           <input
             type="date"
             name="date"
             id="date"
-            // min="2018-01-01"
+            value={data.date.split("training-")[1]}
             onChange={onChange}
           />
-        </fieldset> */}
+        </fieldset>
 
-        <ExcersiseControls
-          program={program}
-          setProgramState={setProgramState}
-        />
-        {/* 
+        <ExcersiseControls data={data} setData={setData} />
+
         <Button type="button" onClick={onSubmit}>
           Submit
-        </Button> */}
+        </Button>
       </form>
     </Page>
   );

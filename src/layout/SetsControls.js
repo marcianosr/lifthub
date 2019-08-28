@@ -2,18 +2,21 @@ import React from "react";
 
 import Button from "./Button";
 
-const SetControls = ({ program, setProgramState, parentId }) => {
+const SetControls = ({ data, setData, parentId }) => {
   const id = React.useRef(0);
 
   const onChange = e => {
-    const values = [...program];
+    const values = [...data.program];
     values[parentId].sets[e.target.id][e.target.name] = e.target.value;
 
-    setProgramState(values);
+    setData({
+      ...data,
+      program: values,
+    });
   };
 
   const addSet = e => {
-    const values = [...program];
+    const values = [...data.program];
 
     id.current++;
 
@@ -22,23 +25,29 @@ const SetControls = ({ program, setProgramState, parentId }) => {
       { id: id.current, parentId, weight: "", reps: "" },
     ];
 
-    setProgramState(values);
+    setData({
+      ...data,
+      program: values,
+    });
   };
 
   const deleteSet = e => {
-    const values = [...program];
+    const values = [...data.program];
 
     values[parentId].sets = [
-      ...program[parentId].sets.slice(0, parseInt(e.target.id)),
-      ...program[parentId].sets.slice(parseInt(e.target.id) + 1),
+      ...data.program[parentId].sets.slice(0, parseInt(e.target.id)),
+      ...data.program[parentId].sets.slice(parseInt(e.target.id) + 1),
     ];
 
-    setProgramState(values);
+    setData({
+      ...data,
+      program: values,
+    });
   };
 
   return (
     <>
-      {program[parentId].sets.map((set, idx) => {
+      {data.program[parentId].sets.map((set, idx) => {
         return (
           <fieldset key={idx}>
             <label>Weight</label>

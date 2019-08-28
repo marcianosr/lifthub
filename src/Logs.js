@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 import { useLocalStorage } from "react-use";
+import { DateTime } from "luxon";
 
 import Block from "./layout/Block";
 import ListItem from "./layout/ListItem";
@@ -21,54 +22,26 @@ const calculateVolume = mockData => {
   });
 };
 
-const getLogs = () => {
-  const [value] = useLocalStorage(`training-17-7-2019`);
-
-  return value;
-};
-
 const Logs = () => {
-  const data = getLogs();
-  console.log(data);
-  return (
-    <Block title={data.name}>
-      <Link to={`edit/${data.date}`}>Edit log</Link>
+  // const data = getStoredLogs();
 
-      <time>{data.date}</time>
-      {data.program.map((list, idx) => (
-        <ListItem key={idx} title={list.excersise} />
-      ))}
-    </Block>
+  const localStorageKeys = Object.keys(localStorage).filter(item =>
+    item.includes("training") ? item : null
   );
+
+  const items = localStorageKeys.map(key => localStorage.getItem(key));
+
+  return items.map((item, i) => {
+    const data = JSON.parse(item);
+
+    return (
+      <section key={i}>
+        <h1>{data.name}</h1>
+        <time>{data.date}</time>
+        <Link to={`edit/${data.date}`}>Edit log</Link>
+      </section>
+    );
+  });
 };
-// mockData.map((data, i) => (
-//   <Block key={i} title={data.name} styles="">
-//     <>
-//       <time>{data.date}</time>
-//       {data.program.map((list, i) => (
-//         <ListItem key={i} title={list.excersise} styles="">
-//           <ul>
-//             {list.sets.map((item, i) => (
-//               <li key={i}>
-//                 <span>set #{i + 1}: </span> - {item.weight}kg - {item.reps}{" "}
-//                 reps - volume: ?? -<span>PR!</span>
-//               </li>
-//             ))}
-//             <span>
-//               <strong>
-//                 Volume:
-//                 {calculateVolume(mockData).map(item => {
-//                   if (item[data.name]) {
-//                     return item[data.name][list.excersise];
-//                   }
-//                 })}
-//               </strong>
-//             </span>
-//           </ul>
-//         </ListItem>
-//       ))}
-//     </>
-//   </Block>
-// ));
 
 export default Logs;
