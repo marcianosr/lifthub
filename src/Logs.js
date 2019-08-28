@@ -20,7 +20,9 @@ const Logs = () => {
         </Link>
 
         <time>{data.date}</time>
-        <Link to={`edit/${data.date}`}>Edit log</Link>
+        <div>
+          <Link to={`edit/${data.date}`}>Edit log</Link>
+        </div>
       </Block>
     );
   });

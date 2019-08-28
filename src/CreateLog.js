@@ -7,7 +7,7 @@ import Button from "./layout/Button";
 import ExcersiseControls from "./layout/ExcersiseControls";
 
 const CreateLog = () => {
-  const [data, setData, onChange, onSubmit] = useForm();
+  const [data, setData, onChange, onSubmit, disabled] = useForm();
 
   return (
     <Page>
@@ -49,7 +49,12 @@ const CreateLog = () => {
 
         <ExcersiseControls data={data} setData={setData} />
 
-        <Button onClick={onSubmit}>Submit</Button>
+        <Button onClick={onSubmit} disabled={disabled}>
+          Submit
+        </Button>
+        {disabled && (
+          <span>Warning: This date already contains a trainingslog.</span>
+        )}
       </form>
     </Page>
   );

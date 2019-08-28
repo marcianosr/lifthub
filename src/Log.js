@@ -7,11 +7,11 @@ const calculateVolume = data => {
     return [
       ...acc,
       {
-        ["excersise"]: item.excersise,
+        excersise: item.excersise,
         volume: item.sets.reduce((acc, it) => {
           return acc + it.weight * it.reps;
         }, 0),
-        sets: item.sets.length,
+        sets: item.sets,
       },
     ];
   }, []);
@@ -19,7 +19,6 @@ const calculateVolume = data => {
 const Log = ({ match }) => {
   const [data] = useForm(match.params.date);
 
-  console.log(calculateVolume(data));
   return (
     <>
       <h1>{data.name}</h1>
@@ -28,9 +27,15 @@ const Log = ({ match }) => {
         {calculateVolume(data).map(item => (
           <>
             <h2>{item.excersise}</h2>
-            <span>Total volume: {item.volume}</span>
-
-            <span>Total sets: {item.sets}</span>
+            <ol>
+              {item.sets.map((set, idx) => (
+                <li key={idx}>
+                  Weight: {set.weight} Reps: {set.reps}
+                </li>
+              ))}
+            </ol>
+            <p>Total volume: {item.volume}</p>
+            <p>Total sets: {item.sets.length}</p>
           </>
         ))}
       </section>
