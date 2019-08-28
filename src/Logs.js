@@ -2,23 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Block from "./layout/Block";
-import ListItem from "./layout/ListItem";
-import { mockData } from "./mockData";
-
-const calculateVolume = mockData => {
-  return mockData.map(data => {
-    return {
-      [data.name]: data.program.reduce((acc, item) => {
-        return {
-          ...acc,
-          [item.excersise]: item.sets.reduce((acc, it) => {
-            return acc + it.weight * it.reps;
-          }, 0),
-        };
-      }, {}),
-    };
-  });
-};
 
 const Logs = () => {
   const localStorageKeys = Object.keys(localStorage).filter(item =>
@@ -32,7 +15,10 @@ const Logs = () => {
 
     return (
       <Block key={i}>
-        <h1>{data.name}</h1>
+        <Link to={`log/${data.date}`}>
+          <h1>{data.name}</h1>
+        </Link>
+
         <time>{data.date}</time>
         <Link to={`edit/${data.date}`}>Edit log</Link>
       </Block>

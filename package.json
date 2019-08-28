@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "lint": "eslint --ignore-path .gitignore . --color"
+    "lint": "eslint --ignore-path .gitignore src/ --color"
   },
   "dependencies": {
     "keyboardjs": "^2.5.1",

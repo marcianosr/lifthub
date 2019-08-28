@@ -55,7 +55,7 @@ const useForm = route => {
     if (route) {
       const item = JSON.parse(localStorage.getItem(`${route}`));
 
-      console.log(item);
+      console.log("item", item);
       setData(item);
     }
   }, []);

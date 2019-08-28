@@ -16,8 +16,8 @@ export const mockData = [
           { reps: 4, weight: 170, workingSet: true },
           { reps: 4, weight: 170, workingSet: true },
           { reps: 4, weight: 170, workingSet: true },
-          { reps: 4, weight: 170, workingSet: true }
-        ]
+          { reps: 4, weight: 170, workingSet: true },
+        ],
       },
       {
         excersise: "Bench Press",
@@ -32,10 +32,10 @@ export const mockData = [
           { reps: 3, weight: 115, workingSet: true },
           { reps: 3, weight: 115, workingSet: true },
           { reps: 3, weight: 115, workingSet: true },
-          { reps: 3, weight: 115, workingSet: true }
-        ]
-      }
-    ]
+          { reps: 3, weight: 115, workingSet: true },
+        ],
+      },
+    ],
   },
   {
     name: "Training #2",
@@ -50,8 +50,8 @@ export const mockData = [
           { reps: 5, weight: 120, workingSet: true },
           { reps: 5, weight: 120, workingSet: true },
           { reps: 5, weight: 120, workingSet: true },
-          { reps: 5, weight: 120, workingSet: true }
-        ]
+          { reps: 5, weight: 120, workingSet: true },
+        ],
       },
       {
         excersise: "Bench Press feet-up",
@@ -62,16 +62,16 @@ export const mockData = [
           { reps: 5, weight: 102.5, workingSet: true },
           { reps: 5, weight: 102.5, workingSet: true },
           { reps: 5, weight: 102.5, workingSet: true },
-          { reps: 5, weight: 102.5, workingSet: true }
-        ]
+          { reps: 5, weight: 102.5, workingSet: true },
+        ],
       },
       {
         excersise: "Close grip bench press",
         sets: [
           { reps: 5, weight: 100, workingSet: true },
           { reps: 5, weight: 100, workingSet: true },
-          { reps: 5, weight: 100, workingSet: true }
-        ]
+          { reps: 5, weight: 100, workingSet: true },
+        ],
       },
       {
         excersise: "Deadlift",
@@ -86,10 +86,10 @@ export const mockData = [
           { reps: 2, weight: 185, workingSet: true },
           { reps: 2, weight: 185, workingSet: true },
           { reps: 2, weight: 185, workingSet: true },
-          { reps: 2, weight: 185, workingSet: true }
-        ]
-      }
-    ]
+          { reps: 2, weight: 185, workingSet: true },
+        ],
+      },
+    ],
   },
   {
     name: "Training #3",
@@ -106,8 +106,8 @@ export const mockData = [
           { reps: 4, weight: 170, workingSet: true },
           { reps: 3, weight: 170, workingSet: true },
           { reps: 3, weight: 170, workingSet: true },
-          { reps: 4, weight: 170, workingSet: true }
-        ]
+          { reps: 4, weight: 170, workingSet: true },
+        ],
       },
       {
         excersise: "Bench Press",
@@ -123,9 +123,9 @@ export const mockData = [
           { reps: 4, weight: 115, workingSet: true },
           { reps: 4, weight: 115, workingSet: true },
           { reps: 4, weight: 115, workingSet: true },
-          { reps: 4, weight: 115, workingSet: true }
-        ]
-      }
-    ]
-  }
+          { reps: 4, weight: 115, workingSet: true },
+        ],
+      },
+    ],
+  },
 ];

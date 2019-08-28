@@ -1,9 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Page from "./layout/Page";
 import CreateLog from "./CreateLog";
+import Log from "./Log";
 import Logs from "./Logs";
 import EditLog from "./EditLog";
 
@@ -23,6 +24,7 @@ const App = () => {
           <Link to="/create">Create log</Link>
           <Route exact path="/" component={Home} />
           <Route path="/logs" component={Logs} />
+          <Route path="/log/:date" component={Log} />
           <Route path="/create" component={CreateLog} />
           <Route path="/edit/:date" component={EditLog} />
         </Router>
