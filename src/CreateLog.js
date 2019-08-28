@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import useForm from "./hooks/useForm";
 
@@ -49,9 +49,7 @@ const CreateLog = () => {
 
         <ExcersiseControls data={data} setData={setData} />
 
-        <Button type="button" onClick={onSubmit}>
-          Submit
-        </Button>
+        <Button onClick={onSubmit}>Submit</Button>
       </form>
     </Page>
   );

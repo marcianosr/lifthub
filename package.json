@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "lint": "eslint --ignore-path .gitignore . --color"
   },
   "dependencies": {
     "keyboardjs": "^2.5.1",

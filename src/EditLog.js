@@ -1,9 +1,9 @@
 import React from "react";
 
+import useForm from "./hooks/useForm";
+
 import ExcersiseControls from "./layout/ExcersiseControls";
 import Button from "./layout/Button";
-
-import useForm from "./hooks/useForm";
 
 const EditLog = ({ match }) => {
   const [data, setData, onChange, onSubmit] = useForm(match.params.date);
@@ -31,9 +31,7 @@ const EditLog = ({ match }) => {
 
       <ExcersiseControls data={data} setData={setData} />
 
-      <Button type="button" onClick={onSubmit}>
-        Submit
-      </Button>
+      <Button onClick={onSubmit}>Submit</Button>
     </form>
   );
 };

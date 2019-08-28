@@ -47,31 +47,29 @@ const SetControls = ({ data, setData, parentId }) => {
 
   return (
     <>
-      {data.program[parentId].sets.map((set, idx) => {
-        return (
-          <fieldset key={idx}>
-            <label>Weight</label>
-            <input
-              id={idx}
-              type="number"
-              value={set.weight}
-              name="weight"
-              onChange={onChange}
-            />
-            <label>Reps</label>
-            <input
-              id={idx}
-              type="number"
-              value={set.reps}
-              name="reps"
-              onChange={onChange}
-            />
-            <Button id={idx} onClick={deleteSet}>
-              Delete set
-            </Button>
-          </fieldset>
-        );
-      })}
+      {data.program[parentId].sets.map((set, idx) => (
+        <fieldset key={idx}>
+          <label>Weight</label>
+          <input
+            id={idx}
+            type="number"
+            value={set.weight}
+            name="weight"
+            onChange={onChange}
+          />
+          <label>Reps</label>
+          <input
+            id={idx}
+            type="number"
+            value={set.reps}
+            name="reps"
+            onChange={onChange}
+          />
+          <Button id={idx} onClick={deleteSet}>
+            Delete set
+          </Button>
+        </fieldset>
+      ))}
       <Button onClick={addSet}>Add new set</Button>
     </>
   );

@@ -1,7 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import { useLocalStorage } from "react-use";
-import { DateTime } from "luxon";
+import { Link } from "react-router-dom";
 
 import Block from "./layout/Block";
 import ListItem from "./layout/ListItem";
@@ -23,8 +21,6 @@ const calculateVolume = mockData => {
 };
 
 const Logs = () => {
-  // const data = getStoredLogs();
-
   const localStorageKeys = Object.keys(localStorage).filter(item =>
     item.includes("training") ? item : null
   );
@@ -35,11 +31,11 @@ const Logs = () => {
     const data = JSON.parse(item);
 
     return (
-      <section key={i}>
+      <Block key={i}>
         <h1>{data.name}</h1>
         <time>{data.date}</time>
         <Link to={`edit/${data.date}`}>Edit log</Link>
-      </section>
+      </Block>
     );
   });
 };
