@@ -21,7 +21,7 @@ const Log = ({ match }) => {
 
   return (
     <>
-      <h1>{data.name}</h1>
+      <h2>{data.name}</h2>
       <time>{data.date}</time>
       <section>
         {calculateVolume(data).map(item => (

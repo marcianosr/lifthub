@@ -1,6 +1,8 @@
 import React from "react";
 import { DateTime } from "luxon";
 
+import { parsedLogs } from "../utils/index";
+
 const useForm = route => {
   const date = DateTime.local(); // get today's date
   const [disabled, setDisabled] = React.useState(false);
@@ -22,6 +24,7 @@ const useForm = route => {
       },
     ],
   });
+  const [logs, setLogs] = React.useState();
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -44,24 +47,16 @@ const useForm = route => {
   };
 
   React.useEffect(() => {
-    const localStorageKeys = Object.keys(localStorage).filter(item =>
-      item.includes("training") ? item : null
-    );
-    const items = localStorageKeys.map(key => localStorage.getItem(key));
+    setLogs(parsedLogs);
 
-    const date = items
-      .map(item => JSON.parse(item))
-      .find(item => {
-        return item.date === data.date;
-      });
+    const date = parsedLogs.find(log => log.date === data.date);
 
-    console.log(date);
     if (date) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  });
+  }, [logs, data.date]);
   // When the form is processed, it doesn't capture the correct state because the component hasn't been re-rendered yet.
   React.useEffect(() => {
     if (isSubmitting) {

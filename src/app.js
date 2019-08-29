@@ -19,9 +19,17 @@ const App = () => {
         <h1>Powerlift tracker</h1>
 
         <Router>
-          <Link to="/">Home </Link>
-          <Link to="/logs">Logs</Link>
-          <Link to="/create">Create log</Link>
+          <ul>
+            <li>
+              <Link to="/">Home </Link>
+            </li>
+            <li>
+              <Link to="/logs">Logs</Link>
+            </li>
+            <li>
+              <Link to="/create">Create log</Link>
+            </li>
+          </ul>
           <Route exact path="/" component={Home} />
           <Route path="/logs" component={Logs} />
           <Route path="/log/:date" component={Log} />

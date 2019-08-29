@@ -1,31 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { parsedLogs } from "./utils/index";
 import Block from "./layout/Block";
 
 const Logs = () => {
-  const localStorageKeys = Object.keys(localStorage).filter(item =>
-    item.includes("training") ? item : null
+  const [logs, setLogs] = React.useState();
+
+  React.useEffect(() => {
+    setLogs(parsedLogs);
+  }, [logs]);
+
+  return (
+    <Block title="Logs overview">
+      {logs &&
+        logs.map((log, i) => {
+          return (
+            <Block key={i}>
+              <Link to={`log/${log.date}`}>
+                <h1>{log.name}</h1>
+              </Link>
+
+              <time>{log.date}</time>
+              <div>
+                <Link to={`edit/${log.date}`}>Edit log</Link>
+              </div>
+            </Block>
+          );
+        })}
+    </Block>
   );
-
-  const items = localStorageKeys.map(key => localStorage.getItem(key));
-
-  return items.map((item, i) => {
-    const data = JSON.parse(item);
-
-    return (
-      <Block key={i}>
-        <Link to={`log/${data.date}`}>
-          <h1>{data.name}</h1>
-        </Link>
-
-        <time>{data.date}</time>
-        <div>
-          <Link to={`edit/${data.date}`}>Edit log</Link>
-        </div>
-      </Block>
-    );
-  });
 };
 
 export default Logs;
