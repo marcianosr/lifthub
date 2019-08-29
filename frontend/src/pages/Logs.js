@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { parsedLogs } from "./utils/index";
-import Block from "./layout/Block";
+// import { parsedLogs } from "../utils/index";
+import Block from "../layout/Block";
 
 const Logs = () => {
   const [logs, setLogs] = React.useState();
 
-  React.useEffect(() => {
-    setLogs(parsedLogs);
-  }, [logs]);
+  // React.useEffect(() => {
+  //   setLogs(parsedLogs);
+  // }, [logs, setLogs]);
 
   return (
     <Block title="Logs overview">
