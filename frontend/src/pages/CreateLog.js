@@ -1,10 +1,10 @@
 import React from "react";
 
-import useForm from "./hooks/useForm";
+import useForm from "../hooks/useForm";
 
-import Page from "./layout/Page";
-import Button from "./layout/Button";
-import ExcersiseControls from "./layout/ExcersiseControls";
+import Page from "../layout/Page";
+import Button from "../layout/Button";
+import ExcersiseControls from "../layout/ExcersiseControls";
 
 const CreateLog = () => {
   const [data, setData, onChange, onSubmit, disabled] = useForm();
