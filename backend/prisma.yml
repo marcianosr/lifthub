@@ -1,6 +1,10 @@
-endpoint: ${env.PRISMA_ENDPOINT}
+endpoint: https://eu1.prisma.sh/marciano-schildmeijer-5bbae1/lifthub/dev
 datamodel: datamodel.prisma
-# secret: ${env.PRISMA_SECRET}
+
+generate:
+  - generator: javascript-client
+    output: ./generated
+
 hooks:
   post-deploy:
-    - graphql get-schema -p prisma
+    - graphql get-schema -p lifthub
