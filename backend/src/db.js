@@ -5,7 +5,7 @@
 const { Prisma } = require("prisma-binding");
 
 const db = new Prisma({
-  typeDefs: "./generated/schema.graphql", // to see what types are available
+  typeDefs: "./generated/schema.graphql", // to see what types are available (the generated schema.graphql file)
   endpoint: process.env.PRISMA_ENDPOINT,
   secret: process.env.PRISMA_SECRET,
   debug: true
