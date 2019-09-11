@@ -1,10 +1,9 @@
-endpoint: https://eu1.prisma.sh/marciano-schildmeijer-5bbae1/lifthub/dev
+endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 
 generate:
-  - generator: javascript-client
-    output: ./generated
-
+  - generator: graphql-schema
+    output: ./generated/schema.graphql
 hooks:
   post-deploy:
-    - graphql get-schema -p lifthub
+    - prisma generate
