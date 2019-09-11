@@ -1,3 +1,4 @@
+#  Yoga schema
 type User {
   id: ID!
   name: String!
@@ -7,6 +8,14 @@ type Mutation {
   hi: String
 }
 
+type Pokemon {
+  name: String! # "!" means required
+  types: [String]!
+  level: Int!
+}
+
 type Query {
-  hi: String
+  # Return an array of pokemon and is always required.
+  # Passing the exclamation mark inside the array, means tgat we cannot return null as return value
+  pokemon: [Pokemon]!
 }
