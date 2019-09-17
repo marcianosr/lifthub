@@ -1,5 +1,27 @@
+# Datamodel for the prisma DB
+
 type User {
-  id: ID! @id
+  id: ID! @id #Research about directives
   name: String!
   email: String!
+}
+
+type Sets {
+  id: ID! @id
+  weight: Int!
+  reps: Int!
+}
+
+type Program {
+  id: ID! @id
+  excersise: String!
+  # sets: [Sets]
+}
+
+type Log {
+  id: ID! @id
+  name: String!
+  date: DateTime!
+  # program: [Program]
+  # user: User!
 }

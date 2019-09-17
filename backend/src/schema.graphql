@@ -1,21 +1,52 @@
-#  Yoga schema
+#  Schema for graphql yoga
+
+# import... as a comment 😅
+# import * from "../generated/schema.graphql"
+
 type User {
   id: ID!
   name: String!
 }
 
-type Mutation {
-  hi: String
+# We have inputs to specify the input schema's for the mutation and allows to input one argument into the function
+input SetsInput {
+  weight: Int!
+  reps: Int!
 }
 
-type Pokemon {
-  name: String! # "!" means required
-  types: [String]!
-  level: Int!
+type ProgramInput {
+  excersise: String!
+  # sets: [Sets]!
+}
+
+input LogInput {
+  name: String!
+  date: DateTime!
+  # program: [Program]!
+}
+
+type Mutation {
+  createLog(data: LogInput): Log! # "Log" comes from the generated graphql file
+  # createProgram(data: ProgramInput): Program!
+  # createSets(data: SetsInput): Sets!
 }
 
 type Query {
-  # Return an array of pokemon and is always required.
-  # Passing the exclamation mark inside the array, means tgat we cannot return null as return value
-  pokemon: [Pokemon]!
+  logs: [Log]
+  # program: Program
+  # sets: Sets
 }
+
+# Example purposes
+# type Pokemon {
+#   name: String! # "!" means required
+#   types: [String]!
+#   level: Int!
+# }
+
+# type Query {
+#   # Return an array of pokemon and is always required.
+#   # Passing the exclamation mark inside the array, means tgat we cannot return null as return value
+#   # pokemon: [Pokemon]!
+#   log: Log
+# }
