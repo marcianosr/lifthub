@@ -16,7 +16,7 @@ const Mutation = {
       info
     ); // item is returned when it is created
 
-    console.log("mutation:", log);
+    // console.log("mutation:", log);
     return log;
   }
 };
