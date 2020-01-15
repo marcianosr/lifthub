@@ -30,7 +30,6 @@ const Logs = () => {
       {!loading ? (
         <Block title={`Logs overview from: ${data.user.name}`}>
           {data.user.logs.map(log => {
-            console.log(log);
             return (
               <Link
                 key={log.id}
