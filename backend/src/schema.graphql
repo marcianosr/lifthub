@@ -1,4 +1,10 @@
-#  Schema for graphql yoga
+## ## ## ## ## ## ## ## ## ## ## ## ## ##
+##
+## Schema for graphql yoga, contains queries and mutations. (NOT for the back-end)
+## This should be the public API for the front-end. Out interface for Java/Script.
+## This has a limited set of data to return
+##
+## ## ## ## ## ## ## ## ## ## ## ## ## ##
 
 # import... as a comment 😅
 # import * from "../generated/schema.graphql"
@@ -6,35 +12,45 @@
 type User {
   id: ID!
   name: String!
+  email: String!
+  logs: [Log]!
+  # fetch the log id
 }
 
-# We have inputs to specify the input schema's for the mutation and allows to input one argument into the function
-input SetsInput {
+type Log {
+  id: ID!
+  name: String!
+  date: String!
+  excersise: [Excersise]!
+}
+
+type Excersise {
+  id: ID!
+  name: String!
+  sets: [Set]!
+}
+
+type Set {
+  id: ID!
   weight: Int!
   reps: Int!
 }
 
-type ProgramInput {
-  excersise: String!
-  # sets: [Sets]!
+# Root queries
+type Query {
+  logs(where: LogWhereInput): [Log]!
+  log(id: ID!): Log
+  # Put the id fromn the log in here
+  excersises: [Excersise]!
+  user(where: UserWhereInput): User!
 }
 
-input LogInput {
-  name: String!
-  date: DateTime!
-  # program: [Program]!
-}
-
+# TRoot mutations
 type Mutation {
-  createLog(data: LogInput): Log! # "Log" comes from the generated graphql file
+  # createLog(data: LogInput): Log! # "Log" comes from the generated graphql file
+  createLog(name: String): Log!
   # createProgram(data: ProgramInput): Program!
   # createSets(data: SetsInput): Sets!
-}
-
-type Query {
-  logs: [Log]
-  # program: Program
-  # sets: Sets
 }
 
 # Example purposes

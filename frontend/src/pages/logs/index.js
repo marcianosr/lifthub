@@ -7,30 +7,46 @@ import gql from "graphql-tag";
 import Page from "../../layout/Page";
 import Block from "../../layout/Block";
 
-const logsQuery = gql`
+const LOGS_BY_USER_QUERY = gql`
   {
-    logs {
-      id
+    user(where: { id: "ck0fbsbqdmq1k0b536of5ncwq" }) {
       name
-      date
+      logs {
+        id
+        name
+        excersise {
+          name
+        }
+      }
     }
   }
 `;
 
-const Logs = props => {
-  const { data, loading } = useQuery(logsQuery);
-  console.log(data);
+const Logs = () => {
+  const { data, loading } = useQuery(LOGS_BY_USER_QUERY);
 
   return (
     <Page>
-      <Block title="Logs overview">
-        {data &&
-          data.logs.map(log => (
-            <Link key={log.id} href={`/logs/[id]`} as={`/logs/${log.id}`}>
-              <a>{log.name}</a>
-            </Link>
-          ))}
-      </Block>
+      {!loading ? (
+        <Block title={`Logs overview from: ${data.user.name}`}>
+          {data.user.logs.map(log => {
+            console.log(log);
+            return (
+              <Link
+                key={log.id}
+                href={{
+                  pathname: "/logs/[id]",
+                }}
+                as={`/logs/${log.id}`}
+              >
+                <a>{log.name}</a>
+              </Link>
+            );
+          })}
+        </Block>
+      ) : (
+        <span>Loading...</span>
+      )}
     </Page>
   );
 };

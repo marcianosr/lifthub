@@ -1,3 +1,5 @@
+// Root for all mutations on the server side.
+
 const Mutation = {
   // mutate data for the prisma db (use the generated api methods, schema.graphql)
 

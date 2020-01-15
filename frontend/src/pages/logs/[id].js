@@ -5,20 +5,20 @@ import gql from "graphql-tag";
 
 // import useForm from "./hooks/useForm";
 
-// const calculateVolume = data => {
-//   return data.program.reduce((acc, item) => {
-//     return [
-//       ...acc,
-//       {
-//         excersise: item.excersise,
-//         volume: item.sets.reduce((acc, it) => {
-//           return acc + it.weight * it.reps;
-//         }, 0),
-//         sets: item.sets,
-//       },
-//     ];
-//   }, []);
-// };
+const calculateVolume = data => {
+  return data.program.reduce((acc, item) => {
+    return [
+      ...acc,
+      {
+        excersise: item.excersise,
+        volume: item.sets.reduce((acc, it) => {
+          return acc + it.weight * it.reps;
+        }, 0),
+        sets: item.sets,
+      },
+    ];
+  }, []);
+};
 // const Log = ({ match }) => {
 //   const [data] = useForm(match.params.date);
 
@@ -48,25 +48,61 @@ import gql from "graphql-tag";
 
 // export default Log;
 
-const logsQuery = gql`
-  {
-    logs {
+// Optimize later: The extra graphql to rendered data passed down from a upper component to prevent an extra call.
+const LOGS_BY_USER_QUERY = gql`
+  query LOGS_BY_USER_QUERY($logId: ID!) {
+    log(id: $logId) {
       id
       name
-      date
+      excersise {
+        name
+        sets {
+          id
+          weight
+          reps
+        }
+      }
     }
   }
 `;
 
 const Log = () => {
   const router = useRouter();
-  const { data, loading } = useQuery(logsQuery);
 
-  const currentLog = data && data.logs.find(log => log.id === router.query.id);
+  const { data, loading } = useQuery(LOGS_BY_USER_QUERY, {
+    variables: { logId: router.query.id },
+  });
 
-  console.log(currentLog);
+  const { log } = { ...data };
 
-  return <h1>Log: {currentLog && currentLog.name}</h1>;
+  return (
+    <section>
+      {log && (
+        <article>
+          <h1>{log.name}</h1>
+          {log.excersise.map(excersise => (
+            <div key={excersise.id}>
+              <p>{excersise.name}</p>
+
+              <ul>
+                {excersise.sets.map(set => (
+                  <li key={set.id}>
+                    {set.weight} - {set.reps}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </article>
+      )}
+    </section>
+  );
 };
 
 export default Log;
+
+{
+  /* <section>
+      <h1>{log.training}</h1>
+    </section> */
+}
