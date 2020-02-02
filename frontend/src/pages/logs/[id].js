@@ -100,9 +100,3 @@ const Log = () => {
 };
 
 export default Log;
-
-{
-  /* <section>
-      <h1>{log.training}</h1>
-    </section> */
-}

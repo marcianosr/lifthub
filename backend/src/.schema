@@ -1,0 +1,43 @@
+
+
+
+// Schema is as follows: 
+
+// Log - Entity that contains all information about a single training. 
+
+{
+    name: "Training 1",;
+    date: "12345",;
+    excersises: [
+        //...
+    ]
+}
+
+
+// Excersises - Entity that contains a name of the excersise and a "sets" type. 
+
+{
+    excersises: [{;;
+        name: "Squat",;;
+        sets: [],
+    },
+    {;; 
+        name: "Squat",;;
+        sets: [],
+    }]
+    
+}
+
+
+{
+    name: "Training 1",;
+    date: "12345",;
+    excersises: [{;;
+        name: "Squat",;;
+        sets: [],
+    },
+    {;; 
+        name: "Squat",;;
+        sets: [],
+    }]
+}

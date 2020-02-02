@@ -10,47 +10,48 @@
 # import * from "../generated/schema.graphql"
 
 type User {
-  id: ID!
-  name: String!
-  email: String!
-  logs: [Log]!
-  # fetch the log id
+	id: ID!
+	name: String!
+	email: String!
+	logs: [Log]!
+	# fetch the log id
 }
 
 type Log {
-  id: ID!
-  name: String!
-  date: String!
-  excersise: [Excersise]!
+	id: ID!
+	name: String!
+	date: String!
+	excersise: [Excersise]!
 }
 
+# Should be "Excersises"
 type Excersise {
-  id: ID!
-  name: String!
-  sets: [Set]!
+	id: ID!
+	name: String!
+	sets: [Set]!
 }
 
 type Set {
-  id: ID!
-  weight: Int!
-  reps: Int!
+	id: ID!
+	weight: Int!
+	reps: Int!
 }
 
 # Root queries
 type Query {
-  logs(where: LogWhereInput): [Log]!
-  log(id: ID!): Log
-  # Put the id fromn the log in here
-  excersises: [Excersise]!
-  user(where: UserWhereInput): User!
+	logs(where: LogWhereInput): [Log]!
+	log(id: ID!): Log
+	# Put the id fromn the log in here
+	excersises: [Excersise]!
+	user(where: UserWhereInput): User!
 }
 
 # TRoot mutations
 type Mutation {
-  # createLog(data: LogInput): Log! # "Log" comes from the generated graphql file
-  createLog(name: String): Log!
-  # createProgram(data: ProgramInput): Program!
-  # createSets(data: SetsInput): Sets!
+	createLog(data: LogCreateInput!): Log! # "Log" comes from the generated graphql file
+	# createLog(name: String, date: String): Log!
+	# createProgram(data: ProgramInput): Program!
+	# createSets(data: SetsInput): Sets!
 }
 
 # Example purposes
