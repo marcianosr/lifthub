@@ -6,48 +6,48 @@ const SetControls = ({ data, setData, parentId }) => {
   const id = React.useRef(0);
 
   const onChange = e => {
-    const values = [...data.program];
+    const values = [...data.excersises];
     values[parentId].sets[e.target.id][e.target.name] = e.target.value;
 
     setData({
       ...data,
-      program: values,
+      excersises: values,
     });
   };
 
   const addSet = e => {
-    const values = [...data.program];
+    const values = [...data.excersises];
 
     id.current++;
 
     values[parentId].sets = [
       ...values[parentId].sets,
-      { id: id.current, parentId, weight: "", reps: "" },
+      { id: id.current, parentId, weight: 0, reps: 0 },
     ];
 
     setData({
       ...data,
-      program: values,
+      excersises: values,
     });
   };
 
   const deleteSet = e => {
-    const values = [...data.program];
+    const values = [...data.excersises];
 
     values[parentId].sets = [
-      ...data.program[parentId].sets.slice(0, parseInt(e.target.id)),
-      ...data.program[parentId].sets.slice(parseInt(e.target.id) + 1),
+      ...data.excersises[parentId].sets.slice(0, parseInt(e.target.id)),
+      ...data.excersises[parentId].sets.slice(parseInt(e.target.id) + 1),
     ];
 
     setData({
       ...data,
-      program: values,
+      excersises: values,
     });
   };
 
   return (
     <>
-      {data.program[parentId].sets.map((set, idx) => (
+      {data.excersises[parentId].sets.map((set, idx) => (
         <fieldset key={idx}>
           <label>Weight</label>
           <input

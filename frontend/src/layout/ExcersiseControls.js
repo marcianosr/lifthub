@@ -6,19 +6,20 @@ const ExcersiseControls = ({ data, setData }) => {
   const id = React.useRef(0);
   const addExcersise = e => {
     id.current++;
+
     setData({
       ...data,
-      program: [
-        ...data.program,
+      excersises: [
+        ...data.excersises,
         {
           id: id.current,
-          excersise: "",
+          name: "",
           sets: [
             {
               id: id.current,
               parentId: id.current,
-              weight: "",
-              reps: "",
+              weight: 0,
+              reps: 0,
             },
           ],
         },
@@ -27,30 +28,30 @@ const ExcersiseControls = ({ data, setData }) => {
   };
 
   const onChange = e => {
-    const values = [...data.program];
+    const values = [...data.excersises];
 
-    values[e.target.id].excersise = e.target.value;
+    values[e.target.id].name = e.target.value;
 
     setData({
       ...data,
-      program: values,
+      excersises: values,
     });
   };
 
   const deleteExcersise = e => {
-    const deletedValues = data.program.filter(
+    const deletedValues = data.excersises.filter(
       (value, idx) => idx !== parseInt(e.target.id)
     );
 
     setData({
       ...data,
-      program: deletedValues,
+      excersises: deletedValues,
     });
   };
 
   return (
     <>
-      {data.program.map((input, idx) => (
+      {data.excersises.map((input, idx) => (
         <fieldset key={idx}>
           <label>Excersise </label>
           <input

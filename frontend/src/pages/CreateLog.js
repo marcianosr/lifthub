@@ -11,7 +11,7 @@ const CreateLog = () => {
 
   return (
     <Page>
-      {data.program.map(value => {
+      {data.excersises.map(value => {
         return (
           <>
             <h2>{value.excersise}</h2>
