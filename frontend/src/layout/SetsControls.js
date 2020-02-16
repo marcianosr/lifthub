@@ -7,7 +7,9 @@ const SetControls = ({ data, setData, parentId }) => {
 
   const onChange = e => {
     const values = [...data.excersises];
-    values[parentId].sets[e.target.id][e.target.name] = e.target.value;
+    values[parentId].sets[e.target.id][e.target.name] = parseInt(
+      e.target.value
+    );
 
     setData({
       ...data,
