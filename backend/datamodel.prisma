@@ -9,15 +9,22 @@
 ##
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
 
+type User {
+	id: ID! @id #Research about directives
+	name: String!
+	email: String!
+	logs: [Log]!
+}
+
 type Log {
 	id: ID! @id
 	name: String!
 	date: DateTime!
 	# A log contains an array of excersises and cannot be null.
-	excersise: [Excersise]!
+	excersises: [Excersises]!
 }
 
-type Excersise {
+type Excersises {
 	id: ID! @id
 	name: String!
 	sets: [Set]! # An excersise contains an array of set(s) and cannot be null.
@@ -27,11 +34,4 @@ type Set {
 	id: ID! @id
 	weight: Int!
 	reps: Int!
-}
-
-type User {
-	id: ID! @id #Research about directives
-	name: String!
-	email: String!
-	logs: [Log]!
 }
