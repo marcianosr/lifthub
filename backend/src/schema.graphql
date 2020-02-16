@@ -21,11 +21,11 @@ type Log {
 	id: ID!
 	name: String!
 	date: String!
-	excersise: [Excersise]!
+	excersises: [Excersises]!
 }
 
 # Should be "Excersises"
-type Excersise {
+type Excersises {
 	id: ID!
 	name: String!
 	sets: [Set]!
@@ -42,7 +42,7 @@ type Query {
 	logs(where: LogWhereInput): [Log]!
 	log(id: ID!): Log
 	# Put the id fromn the log in here
-	excersises: [Excersise]!
+	excersises: [Excersises]!
 	user(where: UserWhereInput): User!
 }
 

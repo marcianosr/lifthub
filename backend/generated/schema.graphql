@@ -1,4 +1,4 @@
-type AggregateExcersise {
+type AggregateExcersises {
   count: Int!
 }
 
@@ -20,47 +20,47 @@ type BatchPayload {
 
 scalar DateTime
 
-type Excersise {
+type Excersises {
   id: ID!
   name: String!
   sets(where: SetWhereInput, orderBy: SetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Set!]
 }
 
-type ExcersiseConnection {
+type ExcersisesConnection {
   pageInfo: PageInfo!
-  edges: [ExcersiseEdge]!
-  aggregate: AggregateExcersise!
+  edges: [ExcersisesEdge]!
+  aggregate: AggregateExcersises!
 }
 
-input ExcersiseCreateInput {
+input ExcersisesCreateInput {
   id: ID
   name: String!
   sets: SetCreateManyInput
 }
 
-input ExcersiseCreateManyInput {
-  create: [ExcersiseCreateInput!]
-  connect: [ExcersiseWhereUniqueInput!]
+input ExcersisesCreateManyInput {
+  create: [ExcersisesCreateInput!]
+  connect: [ExcersisesWhereUniqueInput!]
 }
 
-type ExcersiseEdge {
-  node: Excersise!
+type ExcersisesEdge {
+  node: Excersises!
   cursor: String!
 }
 
-enum ExcersiseOrderByInput {
+enum ExcersisesOrderByInput {
   id_ASC
   id_DESC
   name_ASC
   name_DESC
 }
 
-type ExcersisePreviousValues {
+type ExcersisesPreviousValues {
   id: ID!
   name: String!
 }
 
-input ExcersiseScalarWhereInput {
+input ExcersisesScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -89,76 +89,76 @@ input ExcersiseScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  AND: [ExcersiseScalarWhereInput!]
-  OR: [ExcersiseScalarWhereInput!]
-  NOT: [ExcersiseScalarWhereInput!]
+  AND: [ExcersisesScalarWhereInput!]
+  OR: [ExcersisesScalarWhereInput!]
+  NOT: [ExcersisesScalarWhereInput!]
 }
 
-type ExcersiseSubscriptionPayload {
+type ExcersisesSubscriptionPayload {
   mutation: MutationType!
-  node: Excersise
+  node: Excersises
   updatedFields: [String!]
-  previousValues: ExcersisePreviousValues
+  previousValues: ExcersisesPreviousValues
 }
 
-input ExcersiseSubscriptionWhereInput {
+input ExcersisesSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: ExcersiseWhereInput
-  AND: [ExcersiseSubscriptionWhereInput!]
-  OR: [ExcersiseSubscriptionWhereInput!]
-  NOT: [ExcersiseSubscriptionWhereInput!]
+  node: ExcersisesWhereInput
+  AND: [ExcersisesSubscriptionWhereInput!]
+  OR: [ExcersisesSubscriptionWhereInput!]
+  NOT: [ExcersisesSubscriptionWhereInput!]
 }
 
-input ExcersiseUpdateDataInput {
+input ExcersisesUpdateDataInput {
   name: String
   sets: SetUpdateManyInput
 }
 
-input ExcersiseUpdateInput {
+input ExcersisesUpdateInput {
   name: String
   sets: SetUpdateManyInput
 }
 
-input ExcersiseUpdateManyDataInput {
+input ExcersisesUpdateManyDataInput {
   name: String
 }
 
-input ExcersiseUpdateManyInput {
-  create: [ExcersiseCreateInput!]
-  update: [ExcersiseUpdateWithWhereUniqueNestedInput!]
-  upsert: [ExcersiseUpsertWithWhereUniqueNestedInput!]
-  delete: [ExcersiseWhereUniqueInput!]
-  connect: [ExcersiseWhereUniqueInput!]
-  set: [ExcersiseWhereUniqueInput!]
-  disconnect: [ExcersiseWhereUniqueInput!]
-  deleteMany: [ExcersiseScalarWhereInput!]
-  updateMany: [ExcersiseUpdateManyWithWhereNestedInput!]
+input ExcersisesUpdateManyInput {
+  create: [ExcersisesCreateInput!]
+  update: [ExcersisesUpdateWithWhereUniqueNestedInput!]
+  upsert: [ExcersisesUpsertWithWhereUniqueNestedInput!]
+  delete: [ExcersisesWhereUniqueInput!]
+  connect: [ExcersisesWhereUniqueInput!]
+  set: [ExcersisesWhereUniqueInput!]
+  disconnect: [ExcersisesWhereUniqueInput!]
+  deleteMany: [ExcersisesScalarWhereInput!]
+  updateMany: [ExcersisesUpdateManyWithWhereNestedInput!]
 }
 
-input ExcersiseUpdateManyMutationInput {
+input ExcersisesUpdateManyMutationInput {
   name: String
 }
 
-input ExcersiseUpdateManyWithWhereNestedInput {
-  where: ExcersiseScalarWhereInput!
-  data: ExcersiseUpdateManyDataInput!
+input ExcersisesUpdateManyWithWhereNestedInput {
+  where: ExcersisesScalarWhereInput!
+  data: ExcersisesUpdateManyDataInput!
 }
 
-input ExcersiseUpdateWithWhereUniqueNestedInput {
-  where: ExcersiseWhereUniqueInput!
-  data: ExcersiseUpdateDataInput!
+input ExcersisesUpdateWithWhereUniqueNestedInput {
+  where: ExcersisesWhereUniqueInput!
+  data: ExcersisesUpdateDataInput!
 }
 
-input ExcersiseUpsertWithWhereUniqueNestedInput {
-  where: ExcersiseWhereUniqueInput!
-  update: ExcersiseUpdateDataInput!
-  create: ExcersiseCreateInput!
+input ExcersisesUpsertWithWhereUniqueNestedInput {
+  where: ExcersisesWhereUniqueInput!
+  update: ExcersisesUpdateDataInput!
+  create: ExcersisesCreateInput!
 }
 
-input ExcersiseWhereInput {
+input ExcersisesWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -190,12 +190,12 @@ input ExcersiseWhereInput {
   sets_every: SetWhereInput
   sets_some: SetWhereInput
   sets_none: SetWhereInput
-  AND: [ExcersiseWhereInput!]
-  OR: [ExcersiseWhereInput!]
-  NOT: [ExcersiseWhereInput!]
+  AND: [ExcersisesWhereInput!]
+  OR: [ExcersisesWhereInput!]
+  NOT: [ExcersisesWhereInput!]
 }
 
-input ExcersiseWhereUniqueInput {
+input ExcersisesWhereUniqueInput {
   id: ID
 }
 
@@ -203,7 +203,7 @@ type Log {
   id: ID!
   name: String!
   date: DateTime!
-  excersise(where: ExcersiseWhereInput, orderBy: ExcersiseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Excersise!]
+  excersises(where: ExcersisesWhereInput, orderBy: ExcersisesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Excersises!]
 }
 
 type LogConnection {
@@ -216,7 +216,7 @@ input LogCreateInput {
   id: ID
   name: String!
   date: DateTime!
-  excersise: ExcersiseCreateManyInput
+  excersises: ExcersisesCreateManyInput
 }
 
 input LogCreateManyInput {
@@ -307,13 +307,13 @@ input LogSubscriptionWhereInput {
 input LogUpdateDataInput {
   name: String
   date: DateTime
-  excersise: ExcersiseUpdateManyInput
+  excersises: ExcersisesUpdateManyInput
 }
 
 input LogUpdateInput {
   name: String
   date: DateTime
-  excersise: ExcersiseUpdateManyInput
+  excersises: ExcersisesUpdateManyInput
 }
 
 input LogUpdateManyDataInput {
@@ -391,9 +391,9 @@ input LogWhereInput {
   date_lte: DateTime
   date_gt: DateTime
   date_gte: DateTime
-  excersise_every: ExcersiseWhereInput
-  excersise_some: ExcersiseWhereInput
-  excersise_none: ExcersiseWhereInput
+  excersises_every: ExcersisesWhereInput
+  excersises_some: ExcersisesWhereInput
+  excersises_none: ExcersisesWhereInput
   AND: [LogWhereInput!]
   OR: [LogWhereInput!]
   NOT: [LogWhereInput!]
@@ -406,12 +406,12 @@ input LogWhereUniqueInput {
 scalar Long
 
 type Mutation {
-  createExcersise(data: ExcersiseCreateInput!): Excersise!
-  updateExcersise(data: ExcersiseUpdateInput!, where: ExcersiseWhereUniqueInput!): Excersise
-  updateManyExcersises(data: ExcersiseUpdateManyMutationInput!, where: ExcersiseWhereInput): BatchPayload!
-  upsertExcersise(where: ExcersiseWhereUniqueInput!, create: ExcersiseCreateInput!, update: ExcersiseUpdateInput!): Excersise!
-  deleteExcersise(where: ExcersiseWhereUniqueInput!): Excersise
-  deleteManyExcersises(where: ExcersiseWhereInput): BatchPayload!
+  createExcersises(data: ExcersisesCreateInput!): Excersises!
+  updateExcersises(data: ExcersisesUpdateInput!, where: ExcersisesWhereUniqueInput!): Excersises
+  updateManyExcersiseses(data: ExcersisesUpdateManyMutationInput!, where: ExcersisesWhereInput): BatchPayload!
+  upsertExcersises(where: ExcersisesWhereUniqueInput!, create: ExcersisesCreateInput!, update: ExcersisesUpdateInput!): Excersises!
+  deleteExcersises(where: ExcersisesWhereUniqueInput!): Excersises
+  deleteManyExcersiseses(where: ExcersisesWhereInput): BatchPayload!
   createLog(data: LogCreateInput!): Log!
   updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
   updateManyLogs(data: LogUpdateManyMutationInput!, where: LogWhereInput): BatchPayload!
@@ -450,9 +450,9 @@ type PageInfo {
 }
 
 type Query {
-  excersise(where: ExcersiseWhereUniqueInput!): Excersise
-  excersises(where: ExcersiseWhereInput, orderBy: ExcersiseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Excersise]!
-  excersisesConnection(where: ExcersiseWhereInput, orderBy: ExcersiseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ExcersiseConnection!
+  excersises(where: ExcersisesWhereUniqueInput!): Excersises
+  excersiseses(where: ExcersisesWhereInput, orderBy: ExcersisesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Excersises]!
+  excersisesesConnection(where: ExcersisesWhereInput, orderBy: ExcersisesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ExcersisesConnection!
   log(where: LogWhereUniqueInput!): Log
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log]!
   logsConnection(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LogConnection!
@@ -651,7 +651,7 @@ input SetWhereUniqueInput {
 }
 
 type Subscription {
-  excersise(where: ExcersiseSubscriptionWhereInput): ExcersiseSubscriptionPayload
+  excersises(where: ExcersisesSubscriptionWhereInput): ExcersisesSubscriptionPayload
   log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
   set(where: SetSubscriptionWhereInput): SetSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
