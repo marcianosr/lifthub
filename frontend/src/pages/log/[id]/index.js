@@ -54,7 +54,7 @@ const LOGS_BY_USER_QUERY = gql`
     log(id: $logId) {
       id
       name
-      excersise {
+      excersises {
         name
         sets {
           id
@@ -80,7 +80,7 @@ const Log = () => {
       {log && (
         <article>
           <h1>{log.name}</h1>
-          {log.excersise.map(excersise => (
+          {log.excersises.map(excersise => (
             <div key={excersise.id}>
               <p>{excersise.name}</p>
 

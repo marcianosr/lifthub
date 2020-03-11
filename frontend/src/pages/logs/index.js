@@ -14,7 +14,7 @@ const LOGS_BY_USER_QUERY = gql`
       logs {
         id
         name
-        excersise {
+        excersises {
           name
         }
       }
@@ -29,19 +29,31 @@ const Logs = () => {
     <Page>
       {!loading ? (
         <Block title={`Logs overview from: ${data.user.name}`}>
-          {data.user.logs.map(log => {
-            return (
-              <Link
-                key={log.id}
-                href={{
-                  pathname: "/logs/[id]",
-                }}
-                as={`/logs/${log.id}`}
-              >
-                <a>{log.name}</a>
-              </Link>
-            );
-          })}
+          <ul>
+            {data.user.logs.map(log => {
+              return (
+                <li key={log.id}>
+                  <Link
+                    href={{
+                      pathname: "/log/[id]",
+                    }}
+                    as={`/log/${log.id}`}
+                  >
+                    <a>{log.name}</a>
+                  </Link>
+                  <br />
+                  <span>---</span>
+                  <Link
+                    href={{
+                      pathname: `log/${log.id}/edit`,
+                    }}
+                  >
+                    Edit
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </Block>
       ) : (
         <span>Loading...</span>

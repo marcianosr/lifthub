@@ -49,6 +49,8 @@ type Query {
 # TRoot mutations
 type Mutation {
 	createLog(data: LogCreateInput!): Log! # "Log" comes from the generated graphql file
+	updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
+
 	# createLog(name: String, date: String): Log!
 	# createProgram(data: ProgramInput): Program!
 	# createSets(data: SetsInput): Sets!

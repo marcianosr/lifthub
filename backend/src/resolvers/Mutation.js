@@ -9,7 +9,7 @@ const Mutation = {
 		// ctx.db.mutation returns a promise
 
 		console.log("args", args);
-		console.log("args.data.excersise", args.data.excersise);
+		console.log("args.data.excersises", args.data.excersises);
 		const log = await ctx.db.mutation.createLog(
 			{
 				...args
@@ -18,6 +18,20 @@ const Mutation = {
 		); // item is returned when it is created
 
 		return log;
+	},
+
+	async updateLog(parent, args, ctx, info) {
+		// <TOD></TOD>O Update id's of all tpyes
+		console.log("update args", args);
+
+		const updatedLog = await ctx.db.mutation.updateLog(
+			{
+				...args
+			},
+			info
+		);
+
+		return updatedLog;
 	}
 };
 

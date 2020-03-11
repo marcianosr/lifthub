@@ -53,11 +53,11 @@ const ExcersiseControls = ({ data, setData }) => {
     <>
       {data.excersises.map((input, idx) => (
         <fieldset key={idx}>
-          <label>Excersise </label>
+          <label>Excersise - {input.id}</label>
           <input
             id={idx}
             type="text"
-            value={input.excersise}
+            value={input.name}
             onChange={onChange}
             name="excersise"
           />

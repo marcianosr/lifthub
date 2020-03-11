@@ -1,0 +1,19 @@
+{
+	"id": "ck6piu6x64hto09397cizc3sq",
+	"data": {
+		"name": "help",
+		"date": "2021",
+		"excersises": {
+			"update": [
+				{
+					"where": {
+						"id": "ck6piu6x94htp0939bohtb3jl"
+					},
+					"data": {
+						"name": "squat"
+					}
+				}
+			]
+		}
+	}
+}
