@@ -3,7 +3,7 @@ import withApollo from "next-with-apollo";
 
 export const getApolloClient = ({ headers }) =>
   new ApolloClient({
-    uri: "http://localhost:4000",
+    uri: "http://localhost:4500",
     request: operation => {
       operation.setContext({
         fetchOptions: {
