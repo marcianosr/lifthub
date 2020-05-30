@@ -3,6 +3,7 @@ import App from "next/app";
 // import { ApolloProvider } from "react-apollo";
 import { ApolloProvider } from "@apollo/react-hooks";
 import withApollo from "../apolloClient";
+// import "../styles/styles.css";
 
 class MyApp extends App {
   render() {

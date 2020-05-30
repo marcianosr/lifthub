@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 import useForm from "../../../hooks/useForm";
@@ -31,15 +31,24 @@ const LOG_QUERY = gql`
 const Edit = () => {
   const router = useRouter();
 
-  //   TODO: Mutation doesn't update in DB?!
-
   const { data, loading } = useQuery(LOG_QUERY, {
     variables: { id: router.query.id },
   });
 
-  const [formData, setData, onChange, onSubmit] = useForm("Edit", data);
+  const [
+    formData,
+    setData,
+    onChange,
+    onSubmit,
+    disabled,
+    deletedExcersiseIds,
+    setDeletedExcersiseIds,
+    deletedSetIds,
+    setDeletedSetIds,
+  ] = useForm("Edit", data && data.log);
 
-  console.log("Form", formData);
+  // If the data has been loaded don't show it yet to the frontend
+  // but merge it with the state formData variable
 
   return (
     <form className="edit-log-form">
@@ -50,19 +59,29 @@ const Edit = () => {
           id="training-name"
           name="training-name"
           onChange={onChange}
-          value={data && data.log.name}
+          value={formData && formData.name}
         />
         <label htmlFor="date">Date</label>
         <input
           type="date"
           name="date"
           id="date"
-          //   value={data && data.date}
+          // TODO
+          // value={formData && formData.date}
           onChange={onChange}
         />
       </fieldset>
 
-      {data && <ExcersiseControls data={data.log} setData={setData} />}
+      {formData && (
+        <ExcersiseControls
+          data={formData}
+          setData={setData}
+          deletedExcersiseIds={deletedExcersiseIds}
+          setDeletedExcersiseIds={setDeletedExcersiseIds}
+          deletedSetIds={deletedSetIds}
+          setDeletedSetIds={setDeletedSetIds}
+        />
+      )}
 
       <Button onClick={onSubmit}>Submit</Button>
     </form>

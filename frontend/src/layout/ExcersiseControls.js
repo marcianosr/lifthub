@@ -2,9 +2,16 @@ import React from "react";
 import SetsControls from "./SetsControls";
 import Button from "./Button";
 
-const ExcersiseControls = ({ data, setData }) => {
+const ExcersiseControls = ({
+  data,
+  setData,
+  deletedExcersiseIds,
+  setDeletedExcersiseIds,
+  deletedSetIds,
+  setDeletedSetIds,
+}) => {
   const id = React.useRef(0);
-  const addExcersise = e => {
+  const addExcersise = () => {
     id.current++;
 
     setData({
@@ -39,13 +46,13 @@ const ExcersiseControls = ({ data, setData }) => {
   };
 
   const deleteExcersise = e => {
-    const deletedValues = data.excersises.filter(
+    const excersises = data.excersises.filter(
       (value, idx) => idx !== parseInt(e.target.id)
     );
 
     setData({
       ...data,
-      excersises: deletedValues,
+      excersises,
     });
   };
 
@@ -61,8 +68,20 @@ const ExcersiseControls = ({ data, setData }) => {
             onChange={onChange}
             name="excersise"
           />
-          <SetsControls data={data} setData={setData} parentId={idx} />
-          <Button id={idx} onClick={deleteExcersise}>
+          <SetsControls
+            data={data}
+            setData={setData}
+            parentId={idx}
+            deletedSetIds={deletedSetIds}
+            setDeletedSetIds={setDeletedSetIds}
+          />
+          <Button
+            id={idx}
+            onClick={e => {
+              deleteExcersise(e);
+              setDeletedExcersiseIds([...deletedExcersiseIds, input.id]);
+            }}
+          >
             Delete Excersise
           </Button>
         </fieldset>

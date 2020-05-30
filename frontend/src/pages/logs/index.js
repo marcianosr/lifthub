@@ -25,6 +25,8 @@ const LOGS_BY_USER_QUERY = gql`
 const Logs = () => {
   const { data, loading } = useQuery(LOGS_BY_USER_QUERY);
 
+  console.log(data);
+
   return (
     <Page>
       {!loading ? (

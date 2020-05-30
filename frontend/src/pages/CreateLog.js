@@ -8,23 +8,25 @@ import ExcersiseControls from "../layout/ExcersiseControls";
 
 const CreateLog = () => {
   const [data, setData, onChange, onSubmit, disabled] = useForm();
+  console.log(data);
 
   return (
     <Page>
-      {data.excersises.map(value => {
-        return (
-          <>
-            <h2>{value.excersise}</h2>
-            {value.sets.map((v, idx) => {
-              return (
-                <p key={idx}>
-                  {v.id} - {v.weight} - {v.reps}
-                </p>
-              );
-            })}
-          </>
-        );
-      })}
+      {data &&
+        data.excersises.map(value => {
+          return (
+            <>
+              <h2>{value.excersise}</h2>
+              {value.sets.map((v, idx) => {
+                return (
+                  <p key={idx}>
+                    {v.id} - {v.weight} - {v.reps}
+                  </p>
+                );
+              })}
+            </>
+          );
+        })}
       <h1>Create log</h1>
 
       <form className="create-log-form">

@@ -21,10 +21,10 @@ type Log {
 	name: String!
 	date: DateTime!
 	# A log contains an array of excersises and cannot be null.
-	excersises: [Excersises]!
+	excersises: [Excersise]!
 }
 
-type Excersises {
+type Excersise {
 	id: ID! @id
 	name: String!
 	sets: [Set]! # An excersise contains an array of set(s) and cannot be null.

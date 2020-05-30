@@ -2,7 +2,13 @@ import React from "react";
 
 import Button from "./Button";
 
-const SetControls = ({ data, setData, parentId }) => {
+const SetControls = ({
+  data,
+  setData,
+  parentId,
+  deletedSetIds,
+  setDeletedSetIds,
+}) => {
   const id = React.useRef(0);
 
   const onChange = e => {
@@ -17,7 +23,7 @@ const SetControls = ({ data, setData, parentId }) => {
     });
   };
 
-  const addSet = e => {
+  const addSet = () => {
     const values = [...data.excersises];
 
     id.current++;
@@ -51,7 +57,7 @@ const SetControls = ({ data, setData, parentId }) => {
     <>
       {data.excersises[parentId].sets.map((set, idx) => (
         <fieldset key={idx}>
-          <label>Weight</label>
+          <label>Weight - {set.id}</label>
           <input
             id={idx}
             type="number"
@@ -67,7 +73,13 @@ const SetControls = ({ data, setData, parentId }) => {
             name="reps"
             onChange={onChange}
           />
-          <Button id={idx} onClick={deleteSet}>
+          <Button
+            id={idx}
+            onClick={e => {
+              deleteSet(e);
+              setDeletedSetIds([...deletedSetIds, set.id]);
+            }}
+          >
             Delete set
           </Button>
         </fieldset>

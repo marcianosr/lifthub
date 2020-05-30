@@ -9,10 +9,10 @@ const Mutation = {
 		// ctx.db.mutation returns a promise
 
 		console.log("args", args);
-		console.log("args.data.excersises", args.data.excersises);
+		console.log("args.data.excersises", args.data.excersise);
 		const log = await ctx.db.mutation.createLog(
 			{
-				...args
+				...args,
 			},
 			info
 		); // item is returned when it is created
@@ -21,18 +21,50 @@ const Mutation = {
 	},
 
 	async updateLog(parent, args, ctx, info) {
-		// <TOD></TOD>O Update id's of all tpyes
 		console.log("update args", args);
 
 		const updatedLog = await ctx.db.mutation.updateLog(
 			{
-				...args
+				...args,
 			},
 			info
 		);
 
 		return updatedLog;
-	}
+	},
+
+	async upsertLog(parent, args, ctx, info) {
+		console.log("upsert args", args);
+
+		const upsertedLog = await ctx.db.mutation.upsertLog(
+			{
+				...args,
+			},
+			info
+		);
+
+		return upsertedLog;
+	},
+
+	async deleteManyExcersises(parent, args, ctx, info) {
+		console.log("deleted args", args);
+
+		const deletedExcersises = await ctx.db.mutation.deleteManyExcersises({
+			...args,
+		});
+
+		return deletedExcersises;
+	},
+
+	async deleteManySets(parent, args, ctx, info) {
+		console.log("deleted args", args);
+
+		const deletedSets = await ctx.db.mutation.deleteManySets({
+			...args,
+		});
+
+		return deletedSets;
+	},
 };
 
 module.exports = Mutation;

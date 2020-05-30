@@ -21,11 +21,10 @@ type Log {
 	id: ID!
 	name: String!
 	date: String!
-	excersises: [Excersises]!
+	excersises: [Excersise]!
 }
 
-# Should be "Excersises"
-type Excersises {
+type Excersise {
 	id: ID!
 	name: String!
 	sets: [Set]!
@@ -42,7 +41,7 @@ type Query {
 	logs(where: LogWhereInput): [Log]!
 	log(id: ID!): Log
 	# Put the id fromn the log in here
-	excersises: [Excersises]!
+	excersises: [Excersise]!
 	user(where: UserWhereInput): User!
 }
 
@@ -50,10 +49,13 @@ type Query {
 type Mutation {
 	createLog(data: LogCreateInput!): Log! # "Log" comes from the generated graphql file
 	updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
-
-	# createLog(name: String, date: String): Log!
-	# createProgram(data: ProgramInput): Program!
-	# createSets(data: SetsInput): Sets!
+	upsertLog(
+		where: LogWhereUniqueInput!
+		create: LogCreateInput!
+		update: LogUpdateInput!
+	): Log!
+	deleteManySets(where: SetWhereInput!): BatchPayload!
+	deleteManyExcersises(where: ExcersiseWhereInput!): BatchPayload!
 }
 
 # Example purposes
