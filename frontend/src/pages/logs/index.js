@@ -50,7 +50,7 @@ const Logs = () => {
                       pathname: `log/${log.id}/edit`,
                     }}
                   >
-                    Edit
+                    <a>Edit</a>
                   </Link>
                 </li>
               );
