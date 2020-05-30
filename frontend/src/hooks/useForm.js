@@ -1,68 +1,17 @@
 import React from "react";
 import { DateTime } from "luxon";
-import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-
+import { createNewLog } from "../queries/createNewLog";
+import { upsertLog } from "../queries/upsertLog";
+import { deleteManyExcersises } from "../queries/deleteManyExcersises";
+import { deleteManySets } from "../queries/deleteManySets";
 // import { parsedLogs } from "../utils/index";
 
-const CREATE_NEW_LOG = gql`
-  mutation CreateLog($data: LogCreateInput!) {
-    createLog(data: $data) {
-      name
-      date
-      excersises {
-        name
-        sets {
-          id
-          reps
-          weight
-        }
-      }
-    }
-  }
-`;
-
-const UPSERT_LOG = gql`
-  mutation UpsertLog(
-    $createData: LogCreateInput!
-    $updateData: LogUpdateInput!
-    $id: ID!
-  ) {
-    upsertLog(create: $createData, update: $updateData, where: { id: $id }) {
-      name
-      date
-      excersises {
-        name
-        sets {
-          reps
-          weight
-        }
-      }
-    }
-  }
-`;
-
-const DELETE_MANY_EXCERSISES = gql`
-  mutation deleteMany($id: [ID!]) {
-    deleteManyExcersises(where: { id_in: $id }) {
-      count
-    }
-  }
-`;
-
-const DELETE_MANY_SETS = gql`
-  mutation deleteMany($id: [ID!]) {
-    deleteManySets(where: { id_in: $id }) {
-      count
-    }
-  }
-`;
-
 const useForm = (route, editedData) => {
-  const [createNewLogMutation] = useMutation(CREATE_NEW_LOG);
-  const [upsertLogMutation] = useMutation(UPSERT_LOG);
-  const [deleteManyExcersisesMutation] = useMutation(DELETE_MANY_EXCERSISES);
-  const [deleteManySetsMutation] = useMutation(DELETE_MANY_SETS);
+  const [createNewLogMutation] = useMutation(createNewLog);
+  const [upsertLogMutation] = useMutation(upsertLog);
+  const [deleteManyExcersisesMutation] = useMutation(deleteManyExcersises);
+  const [deleteManySetsMutation] = useMutation(deleteManySets);
 
   const date = DateTime.local(); // get today's date
   const [disabled, setDisabled] = React.useState(false);
